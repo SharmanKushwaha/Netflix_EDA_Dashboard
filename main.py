@@ -42,4 +42,30 @@ df["duration_unit"]  = df["duration"].str.extract(r'([A-Za-z]+)').astype(str)
 df["genre"] = df["listed_in"].str.split(', ')
 # print(df["genre"])
 df["show_id"].duplicated().sum()
-print(df.info())
+# print(df.info())
+# Dataset fully cleaned!!!
+# Q1: How many movies vs TV shows?
+print("\n1. Movies and TV show counts.")
+print(df["type"].value_counts())
+# Q2: Which country has the most content?
+# print(df["country"])
+print("\n2. Country with the most content.")
+print(df["country"].value_counts().head(1))
+# Q3: Top 10 genre?
+print("\n3. Top 10 genre.")
+print(df['genre'].explode().value_counts().head(10))
+# Q4: How has content grown over the years?
+print("\n4. Content growth over years.")
+print(df["year_added"].value_counts().sort_index(ascending=True))
+# Q5: What are the most common ratings?
+print("\n5. Most common rating.")
+print(df["rating"].value_counts().head(10))
+# Q6: What is the avg duration of movies vs TV shows?
+print("\n6. Avg duration by type.")
+print(df.groupby("type")["duration_int"].mean())
+# Q7: Who are the top 10 directors?
+print("\n7. Top 10 directors.")
+print(df[df['director'] != 'Unkown']['director'].value_counts().head(10))
+# Q8: Which year had the most content added?
+print("\n8. Year with the most content.")
+print(df['year_added'].value_counts().head(1))
