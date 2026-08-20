@@ -26,7 +26,7 @@ Exploratory Data Analysis and Interactive Dashboard on Netflix's content library
 
 ## 🚀 How to Run
 ```bash
-git clone https://github.com/yourusername/Netflix_EDA_Dashboard.git
+git clone https://github.com/SharmanKushwaha/Netflix_EDA_Dashboard.git
 cd Netflix_EDA_Dashboard
 pip install -r requirements.txt
 python main.py
