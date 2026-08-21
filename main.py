@@ -96,3 +96,35 @@ plt.grid(True, alpha=0.3, axis='y')
 plt.tight_layout()
 plt.savefig('visualization/top_genres.png', dpi=300, bbox_inches='tight')
 plt.show()
+print("\n--- Seaborn Visualizations ---")
+year_type_counts = df.groupby(['year_added', 'type']).size().unstack(fill_value=0)
+plt.figure(figsize=(14, 8))
+sns.heatmap(
+    year_type_counts,
+    annot=True,
+    fmt='d',
+    cmap='YlOrRd',
+    linewidths=0.5,
+    cbar_kws={'label': 'Number of Titles'}
+)
+plt.title('Netflix Content Added by Year and Type', fontsize=16, fontweight='bold')
+plt.xlabel('Type', fontsize=12)
+plt.ylabel('Year Added', fontsize=12)
+plt.tight_layout()
+plt.savefig('Visualization/heatmap_year_type.png', dpi=300, bbox_inches='tight')
+plt.show()
+plt.figure(figsize=(10, 6))
+sns.countplot(data=df,
+    x='rating',
+    order=df['rating'].value_counts().index[:10],
+    palette='coolwarm',
+    hue='rating',
+    legend=False)
+plt.title('Top 10 Most Common Ratings on Netflix', fontsize=16, fontweight='bold')
+plt.xlabel('Rating', fontsize=12)
+plt.ylabel('Number of Titles', fontsize=12)
+plt.xticks(rotation=45, ha='right')
+plt.grid(True, alpha=0.3, axis='y')
+plt.tight_layout()
+plt.savefig('Visualization/countplot_ratings.png', dpi=300, bbox_inches='tight')
+plt.show()
