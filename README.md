@@ -1,7 +1,7 @@
 # 🎬 Netflix EDA & Dashboard
 
 ## 📖 Overview
-Exploratory Data Analysis and Interactive Dashboard on Netflix's content library.
+Exploratory Data Analysis and Interactive Dashboard on Netflix's content library. This project cleans, analyzes, and visualizes Netflix's movie and TV show catalog to uncover key trends.
 
 ## 📊 Dataset
 - 8,770 titles (after cleaning)
@@ -17,6 +17,19 @@ Exploratory Data Analysis and Interactive Dashboard on Netflix's content library
 6. **Average Duration:** Movies average ~90 minutes; TV Shows average ~2 seasons.
 7. **Top Director:** Raúl Campos has the most titles.
 8. **Peak Year:** 2020 had the most content added.
+
+## 📊 Visualizations
+- **Static Charts (Matplotlib / Seaborn):**
+  - Content Growth Over Years (Line Chart)
+  - Top 10 Genres (Bar Chart)
+  - Most Common Ratings (Countplot)
+  - Heatmap of Content Added by Year and Type
+- **Interactive Charts (Plotly):**
+  - Top 10 Countries (Bar Chart)
+  - Movies vs TV Shows (Pie Chart)
+  - Content Growth Over Years (Line Chart)
+
+> All charts are saved in the `Visualization/` folder. Open the `.html` files in your browser to explore interactive plots.
 
 ## 🛠️ Tech Stack
 - Python 3.8+
