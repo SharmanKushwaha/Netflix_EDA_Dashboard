@@ -84,7 +84,7 @@ plt.grid(True, alpha=0.3)
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig('visualization/content_growth.png', dpi=300, bbox_inches='tight')
-plt.show()
+# plt.show()
 plt.figure(figsize=(10, 6))
 top_genres = df['genre'].explode().value_counts().head(10)
 top_genres.plot(kind='bar', color='#E50914', edgecolor='black', linewidth=1)
@@ -95,7 +95,7 @@ plt.xticks(rotation=45, ha='right')
 plt.grid(True, alpha=0.3, axis='y')
 plt.tight_layout()
 plt.savefig('visualization/top_genres.png', dpi=300, bbox_inches='tight')
-plt.show()
+# plt.show()
 print("\n--- Seaborn Visualizations ---")
 year_type_counts = df.groupby(['year_added', 'type']).size().unstack(fill_value=0)
 plt.figure(figsize=(14, 8))
@@ -112,7 +112,7 @@ plt.xlabel('Type', fontsize=12)
 plt.ylabel('Year Added', fontsize=12)
 plt.tight_layout()
 plt.savefig('Visualization/heatmap_year_type.png', dpi=300, bbox_inches='tight')
-plt.show()
+# plt.show()
 plt.figure(figsize=(10, 6))
 sns.countplot(data=df,
     x='rating',
@@ -127,4 +127,37 @@ plt.xticks(rotation=45, ha='right')
 plt.grid(True, alpha=0.3, axis='y')
 plt.tight_layout()
 plt.savefig('Visualization/countplot_ratings.png', dpi=300, bbox_inches='tight')
-plt.show()
+# plt.show()
+print("\n--- Plotly Interactive Charts ---")
+df['country'] = df['country'].str.replace('Unkown', 'Unknown')
+country_counts = df['country'].str.split(', ').explode().value_counts().head(10)
+fig1 = px.bar(
+    x=country_counts.index,
+    y=country_counts.values,
+    title='Top 10 Countries with Most Content',
+    labels={'x': 'Country', 'y': 'Number of Titles'},
+    color=country_counts.values,
+    color_continuous_scale='Viridis'
+)
+fig1.write_html('Visualization/top_countries.html')
+print("Saved: Visualization/top_countries.html")
+type_counts = df['type'].value_counts()
+fig2 = px.pie(
+    names=type_counts.index,
+    values=type_counts.values,
+    title='Movies vs TV Shows',
+    hole=0.4,
+    color_discrete_sequence=['#E50914', '#221F1F']
+)
+fig2.write_html('Visualization/movies_vs_tvshows.html')
+print("Saved: Visualization/movies_vs_tvshows.html")
+growth_data = df['year_added'].value_counts().sort_index()
+fig3 = px.line(
+    x=growth_data.index,
+    y=growth_data.values,
+    title='Content Growth Over Years',
+    labels={'x': 'Year Added', 'y': 'Number of Titles'},
+    markers=True
+)
+fig3.write_html('Visualization/content_growth_interactive.html')
+print("Saved: Visualization/content_growth_interactive.html")
